@@ -1,6 +1,6 @@
 {
   "name": "@jirasakn/line-bot-mcp-server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "MCP server for interacting with your LINE Official Account",
   "type": "module",
   "engines": {

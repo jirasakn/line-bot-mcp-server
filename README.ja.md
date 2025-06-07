@@ -1,13 +1,23 @@
-# LINE Bot MCP Server
+[English](README.md) | [ภาษาไทย](README.th.md)
+
+# LINE Bot MCP Server - 返信機能付き
 
 [![npmjs](https://badge.fury.io/js/%40line%2Fline-bot-mcp-server.svg)](https://www.npmjs.com/package/@line/line-bot-mcp-server)
 
-LINE公式アカウントとAI Agentを接続するために、LINE Messaging APIを統合する[Model Context Protocol (MCP)](https://github.com/modelcontextprotocol) Server
+LINE公式アカウントとAI Agentを接続するために、LINE Messaging APIを統合する[Model Context Protocol (MCP)](https://github.com/modelcontextprotocol) Serverです。プッシュメッセージとユーザーメッセージへの直接返信の両方をサポートしています
 
 ![](/assets/demo.ja.png)
 
 > [!NOTE]
 > このリポジトリはプレビュー版として提供されています。実験的な目的で提供されており、完全な機能や包括的なサポートが含まれていないことにご注意ください。
+
+## 機能
+
+- LINEユーザーへのメッセージ送信
+- すべてのフォロワーへのブロードキャスト
+- ユーザーメッセージへの直接返信
+- ユーザープロフィール情報の取得
+- メッセージクォータと消費量の確認
 
 ## Tools
 
@@ -23,24 +33,52 @@ LINE公式アカウントとAI Agentを接続するために、LINE Messaging AP
      - `message.altText` (string): フレックスメッセージが表示できない場合に表示される代替テキスト。
      - `message.content` (any): フレックスメッセージの内容。メッセージのレイアウトとコンポーネントを定義するJSONオブジェクト。
      - `message.contents.type` (enum): コンテナのタイプ。'bubble'は単一コンテナ、'carousel'は複数のスワイプ可能なバブルを示す。
-3. **broadcast_text_message**
+3. **reply_text_message**
+   - ユーザーからのメッセージに対して、LINEでシンプルなテキストメッセージで返信する。
+   - **入力:**
+     - `replyToken` (string): ユーザーがメッセージを送信した際にWebhookから受け取る返信トークン。短時間のみ有効。
+     - `message.text` (string): ユーザーに送信するテキスト。
+4. **reply_flex_message**
+   - ユーザーからのメッセージに対して、LINEで高度にカスタマイズ可能なフレックスメッセージで返信する。
+   - **入力:**
+     - `replyToken` (string): ユーザーがメッセージを送信した際にWebhookから受け取る返信トークン。短時間のみ有効。
+     - `message.altText` (string): フレックスメッセージが表示できない場合に表示される代替テキスト。
+     - `message.content` (any): フレックスメッセージの内容。メッセージのレイアウトとコンポーネントを定義するJSONオブジェクト。
+     - `message.contents.type` (enum): コンテナのタイプ。'bubble'は単一コンテナ、'carousel'は複数のスワイプ可能なバブルを示す。
+5. **broadcast_text_message**
    - LINE公式アカウントと友だちになっているすべてのユーザーに、LINEでシンプルなテキストメッセージを送信する。
    - **入力:**
      - `message.text` (string): ユーザーに送信するテキスト。
-4. **broadcast_flex_message**
+6. **broadcast_flex_message**
    - LINE公式アカウントと友だちになっているすべてのユーザーに、LINEで高度にカスタマイズ可能なフレックスメッセージを送信する。
    - **入力:**
      - `message.altText` (string): フレックスメッセージが表示できない場合に表示される代替テキスト。
      - `message.content` (any): フレックスメッセージの内容。メッセージのレイアウトとコンポーネントを定義するJSONオブジェクト。
      - `message.contents.type` (enum): コンテナのタイプ。'bubble'は単一コンテナ、'carousel'は複数のスワイプ可能なバブルを示す。
-5. **get_profile**
+7. **get_profile**
    - LINEユーザーの詳細なプロフィール情報を取得する。表示名、プロフィール画像URL、ステータスメッセージ、言語を取得できる。
    - **入力:**
-      - `user_id` (string?): プロフィールを取得したいユーザーのユーザーID。デフォルトはDESTINATION_USER_ID。`user_id`または`DESTINATION_USER_ID`のどちらか一方は必ず設定する必要があります。=======
-6. **get_message_quota**
+      - `user_id` (string?): プロフィールを取得したいユーザーのユーザーID。デフォルトはDESTINATION_USER_ID。`user_id`または`DESTINATION_USER_ID`のどちらか一方は必ず設定する必要があります。
+8. **get_message_quota**
    - LINE公式アカウントのメッセージ容量と消費量を取得します。月間メッセージ制限と現在の使用量が表示されます。
    - **入力:**
      - なし
+
+## 返信メッセージの使用方法
+
+返信メッセージを使用すると、`replyToken`を使用してユーザーメッセージに直接返信できます。プッシュメッセージよりも効率的な理由は以下の通りです：
+
+1. 無料で、メッセージクォータにカウントされません
+2. 返信が元のメッセージに視覚的にリンクされるため、ユーザーエクスペリエンスが向上します
+3. 会話のコンテキストを維持します
+
+返信メッセージを使用するには：
+
+1. LINEからイベントを受信するためのWebhookエンドポイントを設定します（[LINE Webhook設定](https://developers.line.biz/ja/docs/messaging-api/building-bot/#setting-webhook-url)を参照）
+2. 受信したWebhookイベントから`replyToken`を抽出します
+3. 抽出した`replyToken`を使用して、`reply_text_message`または`reply_flex_message`を使用します
+
+注意：返信トークンは短時間（通常1分）のみ有効なので、Webhookイベントを受信した後すぐに返信を送信する必要があります。
 
 ## インストール (npxを使用)
 

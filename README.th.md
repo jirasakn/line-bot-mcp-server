@@ -2,7 +2,7 @@
 
 # LINE Bot MCP Server - พร้อมรองรับการตอบกลับ (Reply)
 
-[![npmjs](https://badge.fury.io/js/%40line%2Fline-bot-mcp-server.svg)](https://www.npmjs.com/package/@line/line-bot-mcp-server)
+[![npmjs](https://badge.fury.io/js/%40jirasakn%2Fline-bot-mcp-server.svg)](https://www.npmjs.com/package/@jirasakn/line-bot-mcp-server)
 
 เซิร์ฟเวอร์ [Model Context Protocol (MCP)](https://github.com/modelcontextprotocol) ที่ใช้สำหรับเชื่อมต่อ AI Agent เข้ากับ LINE Official Account ผ่าน LINE Messaging API รองรับทั้งการส่งข้อความแบบ Push และการตอบกลับข้อความของผู้ใช้โดยตรง (Reply)
 
@@ -105,7 +105,7 @@
     "line-bot": {
       "command": "npx",
       "args": [
-        "@line/line-bot-mcp-server"
+        "@jirasakn/line-bot-mcp-server"
       ],
       "env": {
         "CHANNEL_ACCESS_TOKEN" : "YOUR_CHANNEL_ACCESS_TOKEN",

@@ -2,7 +2,7 @@
 
 # LINE Bot MCP Server - 返信機能付き
 
-[![npmjs](https://badge.fury.io/js/%40line%2Fline-bot-mcp-server.svg)](https://www.npmjs.com/package/@line/line-bot-mcp-server)
+[![npmjs](https://badge.fury.io/js/%40jirasakn%2Fline-bot-mcp-server.svg)](https://www.npmjs.com/package/@jirasakn/line-bot-mcp-server)
 
 LINE公式アカウントとAI Agentを接続するために、LINE Messaging APIを統合する[Model Context Protocol (MCP)](https://github.com/modelcontextprotocol) Serverです。プッシュメッセージとユーザーメッセージへの直接返信の両方をサポートしています
 
@@ -106,7 +106,7 @@ Claude DesktopやClaudeなどのAI Agentに次の設定を追加してくださ�
     "line-bot": {
       "command": "npx",
       "args": [
-        "@line/line-bot-mcp-server"
+        "@jirasakn/line-bot-mcp-server"
       ],
       "env": {
         "CHANNEL_ACCESS_TOKEN" : "FILL_HERE",

@@ -1,6 +1,6 @@
 {
-  "name": "@line/line-bot-mcp-server",
-  "version": "0.0.1-local",
+  "name": "@jirasakn/line-bot-mcp-server",
+  "version": "0.0.1",
   "description": "MCP server for interacting with your LINE Official Account",
   "type": "module",
   "engines": {
@@ -24,15 +24,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:line/line-bot-mcp-server.git"
+    "url": "git@github.com:jirasakn/line-bot-mcp-server.git"
   },
   "keywords": [
     "line",
     "bot",
     "mcp"
   ],
-  "homepage": "https://github.com/line/line-bot-mcp-server",
-  "bugs": "https://github.com/line/line-bot-mcp-server/issues",
+  "homepage": "https://github.com/jirasakn/line-bot-mcp-server",
+  "bugs": "https://github.com/jirasakn/line-bot-mcp-server/issues",
   "dependencies": {
     "@line/bot-sdk": "^10.0.0",
     "@modelcontextprotocol/sdk": "^1.8.0",

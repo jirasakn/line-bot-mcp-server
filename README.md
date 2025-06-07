@@ -2,7 +2,7 @@
 
 # LINE Bot MCP Server - with Reply Support
 
-[![npmjs](https://badge.fury.io/js/%40line%2Fline-bot-mcp-server.svg)](https://www.npmjs.com/package/@line/line-bot-mcp-server)
+[![npmjs](https://badge.fury.io/js/%40jirasakn%2Fline-bot-mcp-server.svg)](https://www.npmjs.com/package/@jirasakn/line-bot-mcp-server)
 
 [Model Context Protocol (MCP)](https://github.com/modelcontextprotocol) server implementation that integrates the LINE Messaging API to connect an AI Agent to the LINE Official Account. Supports both push messages and direct replies to user messages.
 
@@ -106,7 +106,7 @@ Set the environment variables or arguments as follows:
     "line-bot": {
       "command": "npx",
       "args": [
-        "@line/line-bot-mcp-server"
+        "@jirasakn/line-bot-mcp-server"
       ],
       "env": {
         "CHANNEL_ACCESS_TOKEN" : "FILL_HERE",

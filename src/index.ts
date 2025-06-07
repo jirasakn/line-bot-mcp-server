@@ -25,6 +25,9 @@ import { LINE_BOT_MCP_SERVER_VERSION, USER_AGENT } from "./version.js";
 const NO_USER_ID_ERROR =
   "Error: Specify the userId or set the DESTINATION_USER_ID in the environment variables of this MCP Server.";
 
+const NO_REPLY_TOKEN_ERROR =
+  "Error: Specify the replyToken to reply to a user message.";
+
 const server = new McpServer({
   name: "line-bot",
   version: LINE_BOT_MCP_SERVER_VERSION,
@@ -68,6 +71,12 @@ const userIdSchema = z
   .default(destinationId)
   .describe(
     "The user ID to receive a message. Defaults to DESTINATION_USER_ID.",
+  );
+
+const replyTokenSchema = z
+  .string()
+  .describe(
+    "The reply token received via webhook when a user sends a message. Valid for a short period of time.",
   );
 
 const textMessageSchema = z.object({
@@ -145,6 +154,58 @@ server.tool(
     } catch (error) {
       return createErrorResponse(
         `Failed to push flex message: ${error.message}`,
+      );
+    }
+  },
+);
+
+server.tool(
+  "reply_text_message",
+  "Reply to a user message with a simple text message via LINE. Use this when responding directly to a user message using the replyToken received from a webhook.",
+  {
+    replyToken: replyTokenSchema,
+    message: textMessageSchema,
+  },
+  async ({ replyToken, message }) => {
+    if (!replyToken) {
+      return createErrorResponse(NO_REPLY_TOKEN_ERROR);
+    }
+
+    try {
+      const response = await messagingApiClient.replyMessage({
+        replyToken: replyToken,
+        messages: [message as unknown as line.messagingApi.Message],
+      });
+      return createSuccessResponse(response);
+    } catch (error) {
+      return createErrorResponse(
+        `Failed to reply with message: ${error.message}`,
+      );
+    }
+  },
+);
+
+server.tool(
+  "reply_flex_message",
+  "Reply to a user message with a highly customizable flex message via LINE. Use this when responding directly to a user message using the replyToken received from a webhook.",
+  {
+    replyToken: replyTokenSchema,
+    message: flexMessageSchema,
+  },
+  async ({ replyToken, message }) => {
+    if (!replyToken) {
+      return createErrorResponse(NO_REPLY_TOKEN_ERROR);
+    }
+
+    try {
+      const response = await messagingApiClient.replyMessage({
+        replyToken: replyToken,
+        messages: [message as unknown as line.messagingApi.Message],
+      });
+      return createSuccessResponse(response);
+    } catch (error) {
+      return createErrorResponse(
+        `Failed to reply with flex message: ${error.message}`,
       );
     }
   },

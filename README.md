@@ -131,13 +131,13 @@ If you have a LINE Official Account, enable the Messaging API for your LINE Offi
 Clone this repository:
 
 ```
-git clone git@github.com:line/line-bot-mcp-server.git
+git clone git@github.com:jirasakn/line-bot-mcp-server.git
 ```
 
 Build the Docker image:
 
 ```
-docker build -t line/line-bot-mcp-server .
+docker build -t jirasakn/line-bot-mcp-server .
 ```
 
 ### Step 3: Configure AI Agent
@@ -165,7 +165,7 @@ You can confirm this by following [this instructions](https://developers.line.bi
         "CHANNEL_ACCESS_TOKEN",
         "-e",
         "DESTINATION_USER_ID",
-        "line/line-bot-mcp-server"
+        "jirasakn/line-bot-mcp-server"
       ],
       "env": {
         "CHANNEL_ACCESS_TOKEN" : "FILL_HERE",

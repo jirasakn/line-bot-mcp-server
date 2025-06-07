@@ -124,10 +124,10 @@
 2.  **สร้าง Docker Image**:
     ```bash
     # โคลนโปรเจกต์
-    git clone git@github.com:line/line-bot-mcp-server.git
+    git clone git@github.com:jirasakn/line-bot-mcp-server.git
     
     # สร้าง Docker image
-    docker build -t line/line-bot-mcp-server .
+    docker build -t jirasakn/line-bot-mcp-server .
     ```
 3.  **ตั้งค่า AI Agent**:
     - `CHANNEL_ACCESS_TOKEN` (จำเป็น)
@@ -148,7 +148,7 @@
         "CHANNEL_ACCESS_TOKEN",
         "-e",
         "DESTINATION_USER_ID",
-        "line/line-bot-mcp-server"
+        "jirasakn/line-bot-mcp-server"
       ],
       "env": {
         "CHANNEL_ACCESS_TOKEN" : "YOUR_CHANNEL_ACCESS_TOKEN",

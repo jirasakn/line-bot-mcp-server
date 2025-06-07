@@ -130,12 +130,12 @@ LINE公式アカウントをお持ちであれば、[こちらの手順](https:/
 このリポジトリをクローンします:
 
 ```
-git clone git@github.com:line/line-bot-mcp-server.git
+git clone git@github.com:jirasakn/line-bot-mcp-server.git
 ```
 
 Dockerイメージをビルドします:
 ```
-docker build -t line/line-bot-mcp-server .
+docker build -t jirasakn/line-bot-mcp-server .
 ```
 
 ### Step 3: AI Agentを設定
@@ -161,7 +161,7 @@ Claude DesktopやClaudeなどのAI Agentに次の設定を追加してくださ�
         "CHANNEL_ACCESS_TOKEN",
         "-e",
         "DESTINATION_USER_ID",
-        "line/line-bot-mcp-server"
+        "jirasakn/line-bot-mcp-server"
       ],
       "env": {
         "CHANNEL_ACCESS_TOKEN" : "FILL_HERE",
